@@ -14,7 +14,7 @@ const CHAT = {
     this.socket.disconnect()
     // location.reload()
   },
-  //  提交聊天消息内容
+  //  提交弹幕消息内容
   submit: function (msg) {
     if (msg !== '') {
       var obj = {
