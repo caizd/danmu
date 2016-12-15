@@ -1,13 +1,12 @@
 <template>
   <div class="hello">
-    hello world
     <div v-for="msgObj in CHAT.msgArr">
-      <div v-if="msgObj.login" >{{ msgObj.user.username }}</div>
       <div v-if="!msgObj.login&&!msgObj.logout">
-        <marquee direction="left" behavior="slide" v-if="msgObj.userid!=CHAT.userid" >{{ msgObj.username }} 说： {{ msgObj.msg }}</marquee>
-        <marquee direction="left" behavior="slide" v-if="msgObj.userid==CHAT.userid" >我说：{{ msgObj.msg }}</marquee>
+        <marquee direction="left" behavior="slide" v-if="msgObj.userid!=CHAT.userid" >{{ msgObj.msg }}</marquee>
+        <marquee direction="left" behavior="slide" style="color: red;" v-if="msgObj.userid==CHAT.userid" >{{ msgObj.msg }}</marquee>
       </div>
     </div>
+    <input v-model="msg" />
     <button @click="send">发送</button>
   </div>
 </template>
@@ -38,7 +37,7 @@
     },
     methods: {
       send: function () {
-        CHAT.submit('ssss' + CHAT.genUid())
+        CHAT.submit(this.msg)
       }
     }
   }
