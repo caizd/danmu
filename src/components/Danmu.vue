@@ -1,11 +1,5 @@
 <template>
   <div class="hello">
-    <div v-for="msgObj in CHAT.msgArr">
-      <div v-if="!msgObj.login&&!msgObj.logout">
-        <marquee direction="left" behavior="slide" v-if="msgObj.userid!=CHAT.userid" >{{ msgObj.msg }}</marquee>
-        <marquee direction="left" behavior="slide" style="color: red;" v-if="msgObj.userid==CHAT.userid" >{{ msgObj.msg }}</marquee>
-      </div>
-    </div>
     <input v-model="msg" />
     <button @click="send">发送</button>
   </div>
@@ -18,7 +12,8 @@
     name: 'Danmu',
     data () {
       return {
-        CHAT
+        CHAT,
+        msg: ''
       }
     },
     created () {
@@ -29,8 +24,8 @@
       }
       // if (window.localStorage) {
       window.localStorage.setItem('name', CHAT.genUid())
-      window.localStorage.setItem('color', '333')
-      window.localStorage.setItem('weichat', 'weichatthis')
+      window.localStorage.setItem('color', CHAT.randomColor())
+      window.localStorage.setItem('photo', CHAT.randomPhoto())
       window.localStorage.setItem('userid', CHAT.genUid())
       // }
       CHAT.init('name')
