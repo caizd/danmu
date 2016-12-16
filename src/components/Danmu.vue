@@ -1,11 +1,8 @@
-<template>
-  <div class="danmuBox" >
-    <div class="danmuConnent" id="danmuConnent"></div>
+ <template>
     <div class="hello">
       <div class="msg"><input v-model="msg" value="" /></div>
       <div class="button" @click="send">发送</div>
     </div>
-  </div>
 </template>
 
 <script>

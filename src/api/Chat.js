@@ -110,7 +110,7 @@ const CHAT = {
         'bottom': 0,
         'color': obj.color
       }
-      $('#danmuConnent').barrager(item)
+      $('body').barrager(item)
       CHAT.msgArr.push(obj)
     })
   }
