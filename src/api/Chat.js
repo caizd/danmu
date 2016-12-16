@@ -77,7 +77,7 @@ const CHAT = {
     }
     // this.username = Math.floor(Math.random()*10)
     //  连接websocket后端服务器
-    this.socket = io.connect('ws://localhost:3000/')
+    this.socket = io.connect('ws://se1.clschina.com')
     //  告诉服务器端有用户登录
     this.socket.emit('login', {userid: this.userid, username: this.username, color: this.color, photo: this.photo})
     //  心跳包，30s左右无数据浏览器会断开连接Heartbeat
@@ -110,7 +110,7 @@ const CHAT = {
         'bottom': 0,
         'color': obj.color
       }
-      $('body').barrager(item)
+      $('#danmuConnent').barrager(item)
       CHAT.msgArr.push(obj)
     })
   }

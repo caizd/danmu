@@ -1,7 +1,10 @@
 <template>
-  <div class="hello">
-    <input v-model="msg" />
-    <button @click="send">发送</button>
+  <div class="danmuBox" >
+    <div class="danmuConnent" id="danmuConnent"></div>
+    <div class="hello">
+      <div class="msg"><input v-model="msg" value="" /></div>
+      <div class="button" @click="send">发送</div>
+    </div>
   </div>
 </template>
 
@@ -40,7 +43,6 @@
           var img = $("<img src='' >").appendTo(id + ' .barrage_box .portrait')
           img.attr('src', barrage.img)
         }
-
         divBarragerBox.append(" <div class='z p'></div>")
         if (barrage.close) {
           divBarragerBox.append(" <div class='close z'></div>")
@@ -59,27 +61,39 @@
         }
         var i = 0
         divBarrager.css('margin-right', i)
-        var looper = setInterval(barrager, barrage.speed)
-        function barrager () {
-          var windowWidth = $(window).width() + 600
-          if (i < windowWidth) {
-            i += 1
-            $(id).css('margin-right', i)
-          } else {
-            $(id).remove()
-            return false
-          }
-        }
-        divBarragerBox.mouseover(function () {
-          clearInterval(looper)
-        })
-
-        divBarragerBox.mouseout(function () {
-          looper = setInterval(barrager, barrage.speed)
-        })
-        $(id + '.barrage .barrage_box .close').click(function () {
-          $(id).remove()
-        })
+        var width = parseInt(divBarrager.css('width'))
+        var windowWidth = $(window).width() + width
+        var speed = 100
+        var t = windowWidth / speed
+        divBarrager.css('transition', 'margin-right ' + t + 's linear')
+        console.log('width' + width)
+        divBarrager.css('right', -width)
+        divBarragerBox.css('width', width)
+        divBarrager.css('margin-right', windowWidth)
+        setTimeout(function () { $(id).remove() }, t * 1000)
+//        var looper = setInterval(barrager, barrage.speed)
+//        function barrager () {
+//          var windowWidth = $(window).width() + width
+//          if (i < windowWidth) {
+//            i += 1
+//            $(id).css('margin-right', i)
+//          } else {
+//            $(id).remove()
+//            clearInterval(looper)
+//          }
+//        }
+//        console.log(navigator.userAgent.indexOf('MicroMessenger'))
+//        if (!(navigator.userAgent.indexOf('MicroMessenger') > 0)) {
+//          divBarragerBox.mouseover(function () {
+//            clearInterval(looper)
+//          })
+//          divBarragerBox.mouseout(function () {
+//            looper = setInterval(barrager, barrage.speed)
+//          })
+//        }
+//        $(id + '.barrage .barrage_box .close').click(function () {
+//          $(id).remove()
+//        })
       }
       $.fn.barrager.removeAll = function () {
         $('.barrage').remove()
@@ -110,15 +124,35 @@
   .hello{
     bottom: 0px;
     position: absolute;
+    border-top: 1px solid #dfdfdf;
+    padding: 5px 0px;
+    background-color: #f0f0f0;
     width: 100%;
-    height: 60px;
   }
-  .hello input{
+  .hello .msg{
+    margin: 0px 110px 0px 15px;
+    border: 1px solid #dfdfdf;
+    height: 32px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .hello .msg input{
+    width: 100%;
+    font-size: 18px;
+    display: block;
+    border: none;
     height: 30px;
-    width: 80%;
+    color: #333;
   }
-  .hello button{
-    height: 36px;
-    width: 14%;
+  .hello .button{
+    height: 32px;
+    width: 80px;
+    float: right;
+    border: 1px solid #dfdfdf;
+    font-size: 24px;
+    margin: -34px 15px 0px 15px;
+    line-height: 32px;
+    border-radius: 3px;
+    color: #666;
   }
 </style>
