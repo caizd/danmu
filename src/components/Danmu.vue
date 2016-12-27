@@ -1,7 +1,7 @@
  <template>
     <div v-show="showButton" class="hello">
-      <input v-model="msg" @keyup.enter="send" value="" />
-      <button class="button" @click="send" >发送</button>
+      <div class="msg"><input v-model="msg" @keyup.enter="send" value="" /></div>
+      <div class="button" @click="send" >发送</div>
     </div>
 </template>
 
@@ -65,6 +65,9 @@
         var i = 0
         divBarrager.css('margin-right', i)
         var width = parseInt(divBarrager.css('width'))
+        if (width > $(window).width()) {
+          width = width + 50
+        }
         var windowWidth = $(window).width() + width
         var speed = 100
         var t = windowWidth / speed
@@ -104,15 +107,21 @@
   .hello{
     bottom: 20px;
     background-color: #f0f0f0;
-    height: 36px;
+    height: 76px;
     border-radius: 4px;
-    display: block;
     border: 20px solid;
     margin-top: 500px;
     overflow: hidden;
-    box-sizing: content-box;
+    box-sizing: border-box;
   }
-  .hello input{
+  .hello .msg{
+    width: 80%;
+    background-color: red;
+    height: 36px;
+    float: left;
+    overflow: hidden;
+  }
+  .hello .msg input{
     width: 100%;
     font-size: 22px;
     border: none;
@@ -121,18 +130,16 @@
     vertical-align: middle;
     height: 36px;
     box-shadow: none;
-    box-shadow: none;
     float: left;
   }
   .hello .button{
     height: 36px;
     width: 20%;
     float: right;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 36px;
     color: #fff;
     background-color: #ff9c00;
     border: none;
-    margin-top: -36px;
   }
 </style>
