@@ -1,7 +1,7 @@
  <template>
-    <div class="hello">
-      <div class="msg"><input v-model="msg" value="" /></div>
-      <div class="button" @click="send">发送</div>
+    <div v-show="showButton" class="hello">
+      <input v-model="msg" @keyup.enter="send" value="" />
+      <button class="button" @click="send" >发送</button>
     </div>
 </template>
 
@@ -14,10 +14,16 @@
     data () {
       return {
         CHAT,
-        msg: ''
+        msg: '',
+        showButton: false
       }
     },
     created () {
+      if ((window.navigator.appVersion.match(/iphone/gi) || window.navigator.appVersion.match(/ipad/gi) || window.navigator.appVersion.match(/android/gi)) && !window.navigator.appVersion.match(/windows/gi)) {
+        $('body').css('background-size', '100% 100%')
+        $('body').css('background-image', 'url(/static/img/beijingsj.jpg)')
+        this.showButton = true
+      }
       $.fn.barrager = function (barrage) {
         barrage = $.extend({
           close: true,
@@ -68,29 +74,6 @@
         divBarragerBox.css('width', width)
         divBarrager.css('margin-right', windowWidth)
         setTimeout(function () { $(id).remove() }, t * 1000)
-//        var looper = setInterval(barrager, barrage.speed)
-//        function barrager () {
-//          var windowWidth = $(window).width() + width
-//          if (i < windowWidth) {
-//            i += 1
-//            $(id).css('margin-right', i)
-//          } else {
-//            $(id).remove()
-//            clearInterval(looper)
-//          }
-//        }
-//        console.log(navigator.userAgent.indexOf('MicroMessenger'))
-//        if (!(navigator.userAgent.indexOf('MicroMessenger') > 0)) {
-//          divBarragerBox.mouseover(function () {
-//            clearInterval(looper)
-//          })
-//          divBarragerBox.mouseout(function () {
-//            looper = setInterval(barrager, barrage.speed)
-//          })
-//        }
-//        $(id + '.barrage .barrage_box .close').click(function () {
-//          $(id).remove()
-//        })
       }
       $.fn.barrager.removeAll = function () {
         $('.barrage').remove()
@@ -119,37 +102,37 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .hello{
-    bottom: 0px;
-    position: absolute;
-    border-top: 1px solid #dfdfdf;
-    padding: 5px 0px;
+    bottom: 20px;
     background-color: #f0f0f0;
-    width: 100%;
-  }
-  .hello .msg{
-    margin: 0px 110px 0px 15px;
-    border: 1px solid #dfdfdf;
-    height: 32px;
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .hello .msg input{
-    width: 100%;
-    font-size: 18px;
+    height: 36px;
+    border-radius: 4px;
     display: block;
+    border: 20px solid;
+    margin-top: 500px;
+    overflow: hidden;
+    box-sizing: content-box;
+  }
+  .hello input{
+    width: 100%;
+    font-size: 22px;
     border: none;
-    height: 30px;
-    color: #333;
+    color: #999;
+    -webkit-appearance: none;
+    vertical-align: middle;
+    height: 36px;
+    box-shadow: none;
+    box-shadow: none;
+    float: left;
   }
   .hello .button{
-    height: 32px;
-    width: 80px;
+    height: 36px;
+    width: 20%;
     float: right;
-    border: 1px solid #dfdfdf;
     font-size: 24px;
-    margin: -34px 15px 0px 15px;
-    line-height: 32px;
-    border-radius: 3px;
-    color: #666;
+    line-height: 36px;
+    color: #fff;
+    background-color: #ff9c00;
+    border: none;
+    margin-top: -36px;
   }
 </style>

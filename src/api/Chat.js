@@ -58,8 +58,8 @@ const CHAT = {
     return '#' + (~~(Math.random() * (1 << 24))).toString(16)
   },
   randomPhoto: function () {
-    var photos = ['../static/img/cute.png', '../static/img/haha.gif', '../static/img/heisenberg.png', '../static/img/mj.gif', '../static/img/yaseng.png']
-    return photos[parseInt(4 * Math.random())]
+    var photos = ['../static/img/cute.png', '../static/img/haha.png', '../static/img/heisenberg.png', '../static/img/mj.png', '../static/img/yaseng.png', '../static/img/qwe.png', '../static/img/asd.png']
+    return photos[parseInt(7 * Math.random())]
   },
   init: function () {
     /*
